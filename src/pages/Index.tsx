@@ -1,4 +1,3 @@
-
 import React from 'react';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
@@ -47,7 +46,7 @@ const Index = () => {
                 {categories.map((category, index) => (
                   <AnimatedTransition
                     key={category.name}
-                    animation="scale-in"
+                    animation="fade"
                     className="h-full"
                     style={{ animationDelay: `${index * 100}ms` }}
                   >

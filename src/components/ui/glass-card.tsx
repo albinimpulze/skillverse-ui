@@ -15,16 +15,16 @@ const GlassCard = forwardRef<HTMLDivElement, GlassCardProps>(({
   ...props
 }, ref) => {
   const elevationClasses = {
-    low: 'bg-white/60 shadow-sm',
-    medium: 'bg-white/70 shadow-md',
-    high: 'bg-white/80 shadow-lg',
+    low: 'bg-white/60 shadow-sm border-purple-100',
+    medium: 'bg-white/70 shadow-md border-purple-200',
+    high: 'bg-white/80 shadow-lg border-purple-300',
   };
 
   return (
     <Component
       ref={ref}
       className={cn(
-        'backdrop-blur-md border border-white/20 rounded-xl transition-all duration-300',
+        'backdrop-blur-md border rounded-xl transition-all duration-300',
         elevationClasses[elevation],
         className
       )}
