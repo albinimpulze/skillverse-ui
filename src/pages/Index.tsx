@@ -1,3 +1,4 @@
+
 import React from 'react';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
@@ -44,28 +45,29 @@ const Index = () => {
               
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {categories.map((category, index) => (
-                  <AnimatedTransition
+                  <div
                     key={category.name}
-                    animation="fade"
                     className="h-full"
                     style={{ animationDelay: `${index * 100}ms` }}
                   >
-                    <GlassCard className="p-6 h-full flex flex-col hover:shadow-md transition-all duration-300">
-                      <h3 className="text-xl font-medium">{category.name}</h3>
-                      <p className="mt-2 text-sm text-muted-foreground">{category.count} assessments</p>
-                      <div className="mt-4 flex-grow flex items-end">
-                        <Button 
-                          variant="outline" 
-                          size="sm" 
-                          className="mt-auto text-blue-600 hover:bg-blue-50 hover:text-blue-700 group"
-                          onClick={() => navigate('/dashboard')}
-                        >
-                          Browse
-                          <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                        </Button>
-                      </div>
-                    </GlassCard>
-                  </AnimatedTransition>
+                    <AnimatedTransition animation="fade">
+                      <GlassCard className="p-6 h-full flex flex-col hover:shadow-md transition-all duration-300">
+                        <h3 className="text-xl font-medium">{category.name}</h3>
+                        <p className="mt-2 text-sm text-muted-foreground">{category.count} assessments</p>
+                        <div className="mt-4 flex-grow flex items-end">
+                          <Button 
+                            variant="outline" 
+                            size="sm" 
+                            className="mt-auto text-blue-600 hover:bg-blue-50 hover:text-blue-700 group"
+                            onClick={() => navigate('/dashboard')}
+                          >
+                            Browse
+                            <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                          </Button>
+                        </div>
+                      </GlassCard>
+                    </AnimatedTransition>
+                  </div>
                 ))}
               </div>
             </div>

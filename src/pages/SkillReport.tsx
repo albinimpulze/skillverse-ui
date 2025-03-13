@@ -158,8 +158,7 @@ const SkillReport = () => {
                     <Progress value={score} className="h-2" 
                       style={{ 
                         backgroundColor: 'rgba(168, 85, 247, 0.2)',
-                        '--progress-background': 'rgba(168, 85, 247, 0.2)'
-                      }} 
+                      }}
                     />
                   </div>
                 );

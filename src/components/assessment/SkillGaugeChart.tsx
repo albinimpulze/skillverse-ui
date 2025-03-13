@@ -1,60 +1,51 @@
 
 import React from 'react';
+import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
 
 interface SkillGaugeChartProps {
   score: number;
 }
 
 export const SkillGaugeChart: React.FC<SkillGaugeChartProps> = ({ score }) => {
-  const radius = 80;
-  const strokeWidth = 12;
-  const circumference = 2 * Math.PI * radius;
-  
-  // Calculate how much of the circle to fill
-  const progress = (score / 100) * circumference;
-  const remaining = circumference - progress;
-  
-  // Calculate the color based on the score
-  const getColor = () => {
-    if (score >= 80) return "#10b981"; // green
-    if (score >= 70) return "#8b5cf6"; // purple
-    if (score >= 60) return "#f59e0b"; // yellow
-    return "#ef4444"; // red
+  // Create data for gauge chart
+  const data = [
+    { name: 'Score', value: score },
+    { name: 'Remaining', value: 100 - score },
+  ];
+
+  // Get color based on score
+  const getScoreColor = (score: number) => {
+    if (score >= 80) return '#10b981'; // green
+    if (score >= 70) return '#22c55e'; // light green
+    if (score >= 60) return '#f59e0b'; // yellow
+    return '#ef4444'; // red
   };
 
+  const scoreColor = getScoreColor(score);
+
   return (
-    <div className="relative w-[200px] h-[200px]">
-      <svg width="100%" height="100%" viewBox="0 0 200 200" className="transform -rotate-90">
-        {/* Background circle */}
-        <circle
-          cx="100"
-          cy="100"
-          r={radius}
-          fill="none"
-          stroke="#e5e7eb"
-          strokeWidth={strokeWidth}
-        />
-        
-        {/* Progress arc */}
-        <circle
-          cx="100"
-          cy="100"
-          r={radius}
-          fill="none"
-          stroke={getColor()}
-          strokeWidth={strokeWidth}
-          strokeDasharray={circumference}
-          strokeDashoffset={remaining}
-          strokeLinecap="round"
-        />
-      </svg>
-      
-      {/* Score display */}
-      <div className="absolute inset-0 flex items-center justify-center">
-        <div className="text-center">
-          <span className="text-4xl font-bold">{score.toFixed(0)}</span>
-          <span className="text-lg">%</span>
-        </div>
+    <div className="w-48 h-48 mx-auto relative">
+      <ResponsiveContainer width="100%" height="100%">
+        <PieChart>
+          <Pie
+            data={data}
+            cx="50%"
+            cy="50%"
+            startAngle={180}
+            endAngle={0}
+            innerRadius={60}
+            outerRadius={80}
+            paddingAngle={0}
+            dataKey="value"
+          >
+            <Cell key="score" fill={scoreColor} />
+            <Cell key="remaining" fill="#e5e7eb" />
+          </Pie>
+        </PieChart>
+      </ResponsiveContainer>
+      <div className="absolute inset-0 flex items-center justify-center flex-col">
+        <div className="text-3xl font-bold">{score.toFixed(1)}%</div>
+        <div className="text-xs text-muted-foreground mt-1">Overall Score</div>
       </div>
     </div>
   );
